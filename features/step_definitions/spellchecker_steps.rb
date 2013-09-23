@@ -3,8 +3,12 @@ Given(/^the input to the Frugard::Spellchecker "(.*?)"$/) do |input|
   @input = input
 end
 
+When(/^Frugard::Spellchecker uses the language "(.*?)"$/) do |language|
+  @language = language
+end
+
 When(/^Frugard::Spellchecker checks the word$/) do
-  @result = Frugard::Spellchecker.check(@input)
+  @result = Frugard::Spellchecker.check(@input,:language => @language)
 end
 
 Then(/^the Frugard::Spellchecker reponse should be "(.*?)"$/) do |expected_result|

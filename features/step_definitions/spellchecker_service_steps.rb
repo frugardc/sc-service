@@ -7,13 +7,17 @@ Given(/^Spellchecker Web Service is posted "(.*?)"$/) do |input|
   @input = input
 end
 
+When(/^the user is requesting in the language "(.*?)"$/) do |language|
+  @language = language
+end
+
 When(/^the user wants a response in (.*?)$/) do |format|
   @format = format
 end
 
 When(/^Spellchecker Web Service checks the word$/) do
 	browser = Rack::Test::Session.new(Rack::MockSession.new(Sinatra::Application))
-  @result = browser.get("/spellchecker",:word => @input, :format => @format)
+  @result = browser.get("/spellchecker",:word => @input, :format => @format, :language => @language)
 end
 
 Then(/^the Spellchecker Web Service response should be "(.*?)"$/) do |expected_result|
