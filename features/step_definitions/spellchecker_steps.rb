@@ -1,12 +1,13 @@
 require File.join(File.dirname(__FILE__), "/../../frugard")
-Given(/^the input "(.*?)"$/) do |input|
+Given(/^the input to the Frugard::Spellchecker "(.*?)"$/) do |input|
   @input = input
 end
 
-When(/^spellchecker checks the word$/) do
+When(/^Frugard::Spellchecker checks the word$/) do
   @result = Frugard::Spellchecker.check(@input)
 end
 
-Then(/^the response should be "(.*?)"$/) do |expected_result|
-  @result.to_s.should == expected_result
+Then(/^the Frugard::Spellchecker reponse should be "(.*?)"$/) do |expected_result|
+	print @result
+  @result[:correct].to_s.should == expected_result
 end

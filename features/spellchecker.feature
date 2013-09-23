@@ -1,9 +1,9 @@
 Feature: Verifying
 
 	Scenario Outline: Verify a word is correct
-		Given the input "<input>"
-		When spellchecker checks the word
-		Then the response should be "<output>"
+		Given the input to the Frugard::Spellchecker "<input>"
+		When Frugard::Spellchecker checks the word
+		Then the Frugard::Spellchecker reponse should be "<output>"
 
 		Examples:
 			|input|output|
