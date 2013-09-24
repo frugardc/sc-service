@@ -8,8 +8,9 @@ Feature: Verifying
 		Then the Frugard::Spellchecker reponse should include and array called suggestions 
 
 		Examples:
-			|input|output|language|
-			|cucumber|true|en_US|
-			|cuclumnber|false|en_US|
-			|pepino|true|es|
-			|pepinot|false|es|
+      | input      | output | language |
+      | cucumber   | true   | en_US    |
+      | cuclumnber | false  | en_US    |
+      | pepino     | true   | es       |
+      | pepinot    | false  | es       |
+

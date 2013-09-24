@@ -11,16 +11,16 @@ Feature: Spellchecker Service Checks Spelling and Returns Suggestionsin Various 
 		Then the Spellchecker Web Service reponse suggestions should not contain "<not_a_suggestion>" if false
 
 		Examples:
-			|input|output|format|language|suggestion|not_a_suggestion|
-			|cucumber|true|xml|en|||
-			|cucumber|true|json|en|||
-			|cucumber|true|html|en|||
-			|cuclumber|false|xml|en|cucumber|bundy|
-			|cuclumber|false|json|en|cucumber|bundy|
-			|cuclumber|false|html|en|cucumber|bundy|
-			|pepino|true|xml|es|||
-			|pepino|true|json|es|||
-			|pepino|true|html|es|||
-			|pepinot|false|xml|es|pepino|bundy|
-			|pepinot|false|json|es|pepino|bundy|
-			|pepinot|false|html|es|pepino|bundy|
+      | input     | output | format | language | suggestion | not_a_suggestion |
+      | cucumber  | true   | xml    | en       |            |                  |
+      | cucumber  | true   | json   | en       |            |                  |
+      | cucumber  | true   | html   | en       |            |                  |
+      | cuclumber | false  | xml    | en       | cucumber   | bundy            |
+      | cuclumber | false  | json   | en       | cucumber   | bundy            |
+      | cuclumber | false  | html   | en       | cucumber   | bundy            |
+      | pepino    | true   | xml    | es       |            |                  |
+      | pepino    | true   | json   | es       |            |                  |
+      | pepino    | true   | html   | es       |            |                  |
+      | pepinot   | false  | xml    | es       | pepino     | bundy            |
+      | pepinot   | false  | json   | es       | pepino     | bundy            |
+      | pepinot   | false  | html   | es       | pepino     | bundy            |

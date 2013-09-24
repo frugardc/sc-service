@@ -12,7 +12,6 @@ When(/^Frugard::Spellchecker checks the word$/) do
 end
 
 Then(/^the Frugard::Spellchecker reponse should be "(.*?)"$/) do |expected_result|
-	print @result
   @result[:correct].to_s.should == expected_result
 end
 
