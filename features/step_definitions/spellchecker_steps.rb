@@ -15,3 +15,7 @@ Then(/^the Frugard::Spellchecker reponse should be "(.*?)"$/) do |expected_resul
 	print @result
   @result[:correct].to_s.should == expected_result
 end
+
+Then(/^the Frugard::Spellchecker reponse should include and array called suggestions$/) do
+  @result[:suggestions].class.should == Array
+end

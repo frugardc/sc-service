@@ -3,6 +3,7 @@ module Frugard
 	class Spellchecker
 		def self.check(word,options={})
 			return_vals 					= {}
+			return_vals[:suggestions] = []
 			options[:language]		||= 'en_US'
 			aspeller 							= FFI::Aspell::Speller.new(options[:language], encoding: 'utf-8')
 			return_vals[:word]		= word

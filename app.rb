@@ -4,6 +4,11 @@ require 'sinatra/respond_to'
 require "active_support/core_ext"
 Sinatra::Application.register Sinatra::RespondTo
 set :environment, :development
+
+get '/' do
+	File.read(File.join('public', 'index.html'))
+end
+
 get '/spellchecker.?:format?' do
 	params[:language] ||= "en_US"
 	word = params[:word].gsub(/[^a-zA-Z]/, '') # For now, only allow a-Z

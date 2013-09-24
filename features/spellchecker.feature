@@ -5,6 +5,7 @@ Feature: Verifying
 		When Frugard::Spellchecker uses the language "<language>"
 		When Frugard::Spellchecker checks the word
 		Then the Frugard::Spellchecker reponse should be "<output>"
+		Then the Frugard::Spellchecker reponse should include and array called suggestions 
 
 		Examples:
 			|input|output|language|

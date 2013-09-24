@@ -7,8 +7,9 @@ gem 'i18n'
 gem 'json'
 gem 'active_support', '3.0.0'
 group :test do
-  gem "cucumber-sinatra"
-  gem "cucumber"
+  gem 'cucumber-sinatra'
+  gem 'cucumber'
 	gem 'rack-test'
-  gem "rspec"
+  gem 'rspec'
+  gem 'nokogiri'
 end
