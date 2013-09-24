@@ -17,7 +17,7 @@ end
 
 When(/^Spellchecker Web Service checks the word$/) do
 	browser = Rack::Test::Session.new(Rack::MockSession.new(Sinatra::Application))
-  @result = browser.get("/spellchecker",:word => @input, :format => @format, :language => @language)
+  @result = browser.post("/spellchecker",:word => @input, :format => @format, :language => @language)
 end
 
 Then(/^the Spellchecker Web Service response should be "(.*?)"$/) do |expected_result|

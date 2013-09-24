@@ -1,6 +1,7 @@
 source "http://rubygems.org"
 gem 'sinatra'
 gem 'sinatra-respond_to'
+gem 'sinatra-contrib'
 gem 'ffi-aspell'
 gem 'builder'
 gem 'i18n'

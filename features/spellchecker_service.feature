@@ -1,4 +1,4 @@
-Feature: Verifying Spellchecker Service
+Feature: Spellchecker Service Checks Spelling and Returns Suggestionsin Various Formats
 
 	Scenario Outline: Verify a word is correct posting to the Spellchecker Web Service
 		Given Spellchecker Web Service is posted "<input>"
