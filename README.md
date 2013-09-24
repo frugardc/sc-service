@@ -30,6 +30,7 @@ Installation:
         git clone git@github.com:frugardc/sc-service.git
         cd sc-service
         bundle install
+        cucumber # run the tests to make sure we are all good
         rackup
   
   Documentation of the Spellchecker available at http://aspellchecker.info
