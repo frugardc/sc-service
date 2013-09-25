@@ -1,5 +1,25 @@
 <div class="page-header">
   <h1><span class="glyphicon glyphicon-ok"></span>ASpellchecker.info</h1>
-  <h4>Error: <%= data[:error] %></h4>
-  <h4>Message: <%= data[:message] %></h4>
+
 </div>
+<div class="panel panel-primary">
+	<div class="panel-heading">There was a problem with your request.</div>
+  <div class="panel-body">
+	  <dl>
+	  <dt>Error: </dt>
+	  <dd><%= data[:error] %></dd>
+	  <dt>Message: </dt>
+	  <dd><%= data[:message] %></dd>
+	  <dt>Resource: </dt>
+	  <dd><%= data[:resource] %></dd>    
+		</dl>
+		<ol>
+	  <% if @errors %>
+	  	<% @errors.each do |error| %>
+	  		<li>Reason: <%= error %></li>
+	  	<% end %>
+	  <% end %>
+	</ol>
+	<p>See the documentation at <a href="/">http://aspellchecker.info</a> for more details.</p>
+  </div>
+</div>  

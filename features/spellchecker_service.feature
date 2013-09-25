@@ -24,3 +24,13 @@ Feature: Spellchecker Service Checks Spelling and Returns Suggestionsin Various 
       | pepinot   | false  | xml    | es       | pepino     | bundy            |
       | pepinot   | false  | json   | es       | pepino     | bundy            |
       | pepinot   | false  | html   | es       | pepino     | bundy            |
+
+  Scenario: The user requests an endpoint that is not defined
+  	When the user requests an undefined service
+  	Then the response code should be Not Found
+  	Then the response code should include the requested resource, even if it's bad
+  	Then the response code should not be OK
+
+  Scenario: The user does not specify a word to be checked
+  	When the user makes a request to the spellchecker without a word specified
+  	Then the response code should be Unprocessible Entity

@@ -68,3 +68,29 @@ Then(/^the Spellchecker Web Service reponse suggestions should not contain "(.*?
 		end
 	end
 end
+
+When(/^the user requests an undefined service$/) do
+	browser = Rack::Test::Session.new(Rack::MockSession.new(Sinatra::Application))
+  @hopefully_undfined_response = browser.get("/undefined_service")
+end
+
+Then(/^the response code should be Not Found$/) do
+  @hopefully_undfined_response.status.should == 404
+end
+
+Then(/^the response code should include the requested resource, even if it's bad$/) do
+  @hopefully_undfined_response.body.should =~ /undefined_service/
+end
+
+Then(/^the response code should not be OK$/) do
+  @hopefully_undfined_response.status.should_not == 200
+end
+
+When(/^the user makes a request to the spellchecker without a word specified$/) do
+	browser = Rack::Test::Session.new(Rack::MockSession.new(Sinatra::Application))
+  @no_word_specified_response = browser.get("/spellchecker")
+end
+
+Then(/^the response code should be Unprocessible Entity$/) do
+  @no_word_specified_response.status.should == 422
+end
