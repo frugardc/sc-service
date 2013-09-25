@@ -18,7 +18,7 @@ route :get, :post, '/spellchecker.?:format?' do
 	#      :suggestions_when_correct 	(similarly spelled words returned even if :word is correct)
 	#
 	params[:language] ||= "en_US"
-	word = params[:word].gsub(/[^a-zA-Z]/, '') # For now, only allow a-Z
+	word = params[:word].to_s.gsub(/[^a-zA-Z]/, '') # For now, only allow a-Z
 	data = Frugard::Spellchecker.check(
 		word,
 		:suggestions_when_correct => params[:suggestions_when_correct],
@@ -36,4 +36,19 @@ route :get, :post, '/spellchecker.?:format?' do
       data.to_xml
     }
 	end
+end
+# Errors
+not_found do
+  data = {:error => 404, :message => "404 Resource Not Found"}
+	respond_to do |format|
+		format.html{erb :error, :locals => {:data => data}}
+		format.json{            
+			content_type "application/json"
+      data.to_json
+    }
+    format.xml{            
+			content_type "application/xml"
+      data.to_xml
+    }
+  end
 end
