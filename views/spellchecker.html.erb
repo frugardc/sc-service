@@ -1,16 +1,24 @@
-Word: <%= data[:word]%>
-Correct: <%= data[:correct]%>
-Suggestions: <%= data[:suggestions].join(", ") %>
-
 <div class="page-header">
   <h1><span class="glyphicon glyphicon-ok"></span>ASpellchecker.info</h1>
   <h4>Web Service for the <a href="http://aspell.net/">GNU Aspell Spellchecking Library</a></h4>
   <h4>No affiliation with the GNU Project :)</h4>
 </div>
 <div class="panel panel-primary">
-	<div class="panel-heading">Introduction</div>
+	<div class="panel-heading">Aspellcheck for '<%= data[:word]%>'</div>
   <div class="panel-body">
-    ASpellchecker.info is a REST Style Web Service wrapping the GNU Aspell Free and Open Source spell checker.  Please
-    see the <a href="http://aspell.net/" target="_BLANK">Project's Website</a> for more information.
+	  <dl>
+		  <dt>Word:</dt>
+		  <dd><%= data[:word]%></dd>
+		  <dt>Correct:</dt>
+		  <dd><%= data[:correct]%></dd>  
+			<dt>Suggestions:</dt>
+			<dd>
+				<ul>
+				  	<% data[:suggestions].each do |suggestion| %>
+				  		<li><%= suggestion %></li>
+				  	<% end %>
+				</ul>
+			</dd>
+		</dl>
   </div>
 </div>  

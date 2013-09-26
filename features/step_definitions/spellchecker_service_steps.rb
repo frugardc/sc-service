@@ -94,3 +94,14 @@ end
 Then(/^the response code should be Unprocessible Entity$/) do
   @no_word_specified_response.status.should == 422
 end
+
+When(/^the user makes a request to the spellchecker without valid format$/) do
+	browser = Rack::Test::Session.new(Rack::MockSession.new(Sinatra::Application))
+  @no_valid_format_response = browser.get("/spellchecker", :word => "cucumber", :format => "ickyicky")
+end
+
+Then(/^the response code should be Server Error without the default page$/) do
+  @no_valid_format_response.status.should == 500
+	@no_valid_format_response.body.should_not =~ /sinatra/i
+end
+

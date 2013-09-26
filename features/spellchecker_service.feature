@@ -34,3 +34,7 @@ Feature: Spellchecker Service Checks Spelling and Returns Suggestionsin Various 
   Scenario: The user does not specify a word to be checked
   	When the user makes a request to the spellchecker without a word specified
   	Then the response code should be Unprocessible Entity
+
+  Scenario: The user does not specify an acceptable format
+  	When the user makes a request to the spellchecker without valid format
+  	Then the response code should be Server Error without the default page 	

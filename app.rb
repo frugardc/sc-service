@@ -4,9 +4,15 @@ require 'sinatra/respond_to'
 require "active_support/core_ext"
 require "sinatra/multi_route"
 Sinatra::Application.register Sinatra::RespondTo
-
+set :show_exceptions, false
+set :environment, :production
 
 SUPPORTED_FORMATS =	["xml","html","json"]
+# Catch all formats so a page listing acceptible formats is returned.
+configure do
+  mime_type :all, '*'
+end
+
 # Index Helpfile
 get '/' do
 	File.read(File.join('public', 'index.html'))
@@ -19,8 +25,9 @@ def validate_params(params)
 	end
 	if params[:format] and !SUPPORTED_FORMATS.include?(params[:format])
 		@errors << ["Format #{params[:format]} is not supported.  Please select one of #{SUPPORTED_FORMATS.join(",")}"]
+		params[:format] = "html"
 	end
-	halt 422# unless @errors.empty?
+	halt 422 unless @errors.empty?
 end
 
 route :get, :post, '/spellchecker.?:format?' do
@@ -73,17 +80,23 @@ end
 
 error do
   data = {:error => 500, :message => "500 Application Error", :resource => request.path_info, :full_path => request.fullpath}
-	respond_to do |format|
-		format.html{erb :error, :locals => {:data => data}}
-		format.json{            
-			content_type "application/json"
-      data.to_json
-    }
-    format.xml{            
-			content_type "application/xml"
-      data.to_xml
-    }
-  end
+	begin
+		respond_to do |format|
+			format.html{erb :error, :locals => {:data => data}}
+			format.json{            
+				content_type "application/json"
+	      data.to_json
+	    }
+	    format.xml{            
+				content_type "application/xml"
+	      data.to_xml
+	    }
+	    format.all{erb :error, :locals => {:data => data}}
+	  end
+	rescue
+		status 500
+		File.read(File.join('public', '500.html'))
+	end
 end
 
 error 422 do
