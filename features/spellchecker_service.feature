@@ -12,12 +12,12 @@ Feature: Spellchecker Service Checks Spelling and Returns Suggestionsin Various 
 
 		Examples:
       | input     | output | format | language | suggestion | not_a_suggestion |
-      | cucumber  | true   | xml    | en       |            |                  |
-      | cucumber  | true   | json   | en       |            |                  |
-      | cucumber  | true   | html   | en       |            |                  |
-      | cuclumber | false  | xml    | en       | cucumber   | bundy            |
-      | cuclumber | false  | json   | en       | cucumber   | bundy            |
-      | cuclumber | false  | html   | en       | cucumber   | bundy            |
+      | cucumber  | true   | xml    | en_US    |            |                  |
+      | cucumber  | true   | json   | en_US    |            |                  |
+      | cucumber  | true   | html   | en_US    |            |                  |
+      | cuclumber | false  | xml    | en_US    | cucumber   | bundy            |
+      | cuclumber | false  | json   | en_US    | cucumber   | bundy            |
+      | cuclumber | false  | html   | en_US    | cucumber   | bundy            |
       | pepino    | true   | xml    | es       |            |                  |
       | pepino    | true   | json   | es       |            |                  |
       | pepino    | true   | html   | es       |            |                  |
@@ -37,4 +37,8 @@ Feature: Spellchecker Service Checks Spelling and Returns Suggestionsin Various 
 
   Scenario: The user does not specify an acceptable format
   	When the user makes a request to the spellchecker without valid format
-  	Then the response code should be Server Error without the default page 	
+  	Then the response code should be Server Error without the default page
+
+  Scenario: The user does not specify an acceptable language
+    When the user makes a request to the spellchecker without valid language
+    Then the response code should be Unprocessible Entity 	

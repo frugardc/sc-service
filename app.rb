@@ -4,14 +4,10 @@ require 'sinatra/respond_to'
 require "active_support/core_ext"
 require "sinatra/multi_route"
 Sinatra::Application.register Sinatra::RespondTo
-set :show_exceptions, false
 set :environment, :production
 
 SUPPORTED_FORMATS =	["xml","html","json"]
-# Catch all formats so a page listing acceptible formats is returned.
-configure do
-  mime_type :all, '*'
-end
+SUPPORTED_LANGUAGES =	["en_US","es"]
 
 # Index Helpfile
 get '/' do
@@ -25,7 +21,12 @@ def validate_params(params)
 	end
 	if params[:format] and !SUPPORTED_FORMATS.include?(params[:format])
 		@errors << ["Format #{params[:format]} is not supported.  Please select one of #{SUPPORTED_FORMATS.join(",")}"]
-		params[:format] = "html"
+	end
+	if params[:format] and !SUPPORTED_FORMATS.include?(params[:format])
+		@errors << ["Format #{params[:format]} is not supported.  Please select one of #{SUPPORTED_FORMATS.join(",")}"]
+	end
+	if params[:language] and !SUPPORTED_LANGUAGES.include?(params[:language])
+		@errors << ["Language #{params[:language]} is not supported.  Please select one of #{SUPPORTED_LANGUAGES.join(",")}"]
 	end
 	halt 422 unless @errors.empty?
 end

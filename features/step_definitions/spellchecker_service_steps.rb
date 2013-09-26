@@ -28,7 +28,7 @@ Then(/^the Spellchecker Web Service response should be "(.*?)"$/) do |expected_r
 	when "xml"
 		Hash.from_xml(@result.body)["hash"]["correct"].to_s.should == expected_result
 	when "html"
-		@result.body.should =~ /Correct: #{expected_result}/
+		@result.body.should =~ /<dd>#{expected_result}<\/dd>/
 	end
 end
 
@@ -88,11 +88,11 @@ end
 
 When(/^the user makes a request to the spellchecker without a word specified$/) do
 	browser = Rack::Test::Session.new(Rack::MockSession.new(Sinatra::Application))
-  @no_word_specified_response = browser.get("/spellchecker")
+  @unprocessible_entity_response = browser.get("/spellchecker")
 end
 
 Then(/^the response code should be Unprocessible Entity$/) do
-  @no_word_specified_response.status.should == 422
+  @unprocessible_entity_response.status.should == 422
 end
 
 When(/^the user makes a request to the spellchecker without valid format$/) do
@@ -103,5 +103,10 @@ end
 Then(/^the response code should be Server Error without the default page$/) do
   @no_valid_format_response.status.should == 500
 	@no_valid_format_response.body.should_not =~ /sinatra/i
+end
+
+When(/^the user makes a request to the spellchecker without valid language$/) do
+	browser = Rack::Test::Session.new(Rack::MockSession.new(Sinatra::Application))
+  @unprocessible_entity_response = browser.get("/spellchecker", :word => "cucumber", :language => "ickyicky")
 end
 
