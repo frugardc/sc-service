@@ -29,6 +29,10 @@ body {
 -------------------------------------------------- */
 /* Not required for template or sticky footer method. */
 
+#table{
+  max-width: 900px;
+}
+
 .container {
   width: auto;
   max-width: 910px;

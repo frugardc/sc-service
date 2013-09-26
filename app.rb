@@ -53,13 +53,13 @@ route :get, :post, '/spellchecker.?:format?' do
 	data[:full_path] = request.fullpath
 	respond_to do |format|
 		format.html{erb :spellchecker, :locals => {:data => data}}
-		format.json{            
+	  format.json{            
 			content_type "application/json"
-      data.to_json
+      {"spellchecker" => data}.to_json
     }
     format.xml{            
 			content_type "application/xml"
-      data.to_xml
+      data.to_xml(:root => "spellchecker")
     }
 	end
 end
@@ -67,14 +67,14 @@ end
 not_found do
   data = {:error => 404, :message => "404 Resource Not Found", :resource => request.path_info, :full_path => request.fullpath}
 	respond_to do |format|
-		format.html{erb :error, :locals => {:data => data}}
+		format.html{ erb :error, :locals => {:data => data}}
 		format.json{            
 			content_type "application/json"
-      data.to_json
+      {"error" => data}.to_json
     }
     format.xml{            
 			content_type "application/xml"
-      data.to_xml
+      data.to_xml(:root => "error")
     }
   end
 end
@@ -86,11 +86,11 @@ error do
 			format.html{erb :error, :locals => {:data => data}}
 			format.json{            
 				content_type "application/json"
-	      data.to_json
+	      {"error" => data}.to_json
 	    }
 	    format.xml{            
 				content_type "application/xml"
-	      data.to_xml
+	      data.to_xml(:root => "error")
 	    }
 	    format.all{erb :error, :locals => {:data => data}}
 	  end
@@ -106,11 +106,11 @@ error 422 do
 		format.html{erb :error, :locals => {:data => data}}
 		format.json{            
 			content_type "application/json"
-      data.to_json
+      {"error" => data}.to_json
     }
     format.xml{            
 			content_type "application/xml"
-      data.to_xml
+      data.to_xml(:root => "error")
     }
   end
 end

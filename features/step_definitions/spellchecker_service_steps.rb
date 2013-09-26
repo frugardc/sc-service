@@ -24,9 +24,9 @@ Then(/^the Spellchecker Web Service response should be "(.*?)"$/) do |expected_r
 	@expected_result = expected_result
 	case @format
 	when "json"
-		JSON.parse(@result.body)["correct"].to_s.should == expected_result
+		JSON.parse(@result.body)["spellchecker"]["correct"].to_s.should == expected_result
 	when "xml"
-		Hash.from_xml(@result.body)["hash"]["correct"].to_s.should == expected_result
+		Hash.from_xml(@result.body)["spellchecker"]["correct"].to_s.should == expected_result
 	when "html"
 		@result.body.should =~ /<dd>#{expected_result}<\/dd>/
 	end
@@ -35,9 +35,9 @@ end
 Then(/^the Spellchecker Web Service reponse should include an array called suggestions$/) do
 	case @format
 	when "json"
-		JSON.parse(@result.body)["suggestions"].class.should == Array
+		JSON.parse(@result.body)["spellchecker"]["suggestions"].class.should == Array
 	when "xml"
-		Hash.from_xml(@result.body)["hash"]["suggestions"].class.should == Array
+		Hash.from_xml(@result.body)["spellchecker"]["suggestions"].class.should == Array
 	when "html"
 		@result.body.should =~ /Suggestions/
 	end
@@ -47,9 +47,9 @@ Then(/^the Spellchecker Web Service reponse suggestions should contain "(.*?)" i
 	if !eval(@expected_result) # the response is false (an incorrect word)
 		case @format
 		when "json"
-			JSON.parse(@result.body)["suggestions"].should include(suggestion)
+			JSON.parse(@result.body)["spellchecker"]["suggestions"].should include(suggestion)
 		when "xml"
-			Hash.from_xml(@result.body)["hash"]["suggestions"].should include(suggestion)
+			Hash.from_xml(@result.body)["spellchecker"]["suggestions"].should include(suggestion)
 		when "html"
 			@result.body.should =~ /#{suggestion}/
 		end
@@ -60,9 +60,9 @@ Then(/^the Spellchecker Web Service reponse suggestions should not contain "(.*?
 	if !eval(@expected_result) # the response is false (an incorrect word)
 		case @format
 		when "json"
-			JSON.parse(@result.body)["suggestions"].should_not include(not_a_suggestion)
+			JSON.parse(@result.body)["spellchecker"]["suggestions"].should_not include(not_a_suggestion)
 		when "xml"
-			Hash.from_xml(@result.body)["hash"]["suggestions"].should_not include(not_a_suggestion)
+			Hash.from_xml(@result.body)["spellchecker"]["suggestions"].should_not include(not_a_suggestion)
 		when "html"
 			@result.body.should_not =~ /#{not_a_suggestion}/
 		end
